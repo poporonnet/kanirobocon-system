@@ -4,17 +4,17 @@
 <meta http-equiv="content-language" content="ja">
 <title>かにロボコン得点記録システム</title>
 <meta property="og:image" content="kanirobocon-r2.png">
-<link rel="apple-touch-icon" href="kanirobocon-icon.png"/>
+<link rel="apple-touch-icon" href="images/kanirobocon-icon.png"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
 <meta name="format-detection" content="telephone=no">
 <head>
 <script src=lib/fukuno.js></script>
-<script src=minidb.js></script>
-<script src=match.js></script>
+<script src=js/minidb.js></script>
+<script src=js/match.js></script>
 <script type="module">
-import { Settings } from "./Settings.js";
+import { Settings } from "./js/Settings.js";
 
 const MAX_ENTRY_T = Settings.getNumberOfMatch("T");
 const MAX_ENTRY_K = Settings.getNumberOfMatch("K");
