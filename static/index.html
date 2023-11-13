@@ -11,22 +11,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
     <meta name="format-detection" content="telephone=no">
-    <script src="https://unpkg.com/xxhash-wasm/umd/xxhash-wasm.js"></script>
-    <script>
-        "use strict";
-        window.onload = function () {
-            btn.onclick = async function () {
-                const {h32, h64} = await xxhash()
-                const hashedid = h64(inputid.value.toLowerCase()).toString(16)
-                if (hashedid !== "93cd62db80be1e79") {
-                    alert("ID / パスワードが違います");
-                    return;
-                }
-                localStorage.setItem("key", inputpw.value);
-                window.location.href = "menu.html";
-            };
-        };
-    </script>
+    <script src="js/index.js"></script>
     <style>
         body {
             text-align: center;
