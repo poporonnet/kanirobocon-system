@@ -61,3 +61,10 @@ data/entry.csv に、参加者情報を記入してください
 
 - [福井こどもプログラミング協議会](https://fkpc.github.io/)
 - [PCN魚津](https://pcn-uozu.com/)
+
+## 修正しなければいけないこと
+- [ ] デッドコードを削除
+- [ ] `var`を削除
+- [ ] 大規模なリファクタリング
+  - [ ] csv -> json or Deno KV
+  - [ ] JS -> TS
