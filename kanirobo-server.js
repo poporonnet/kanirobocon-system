@@ -13,7 +13,7 @@ const fromURLSearchParams = (param) => {
 };
 const retJSONP = (callback, obj) => {
   const s = `${callback}(${JSON.stringify(obj)});`;
-  return new Response(s, { headers: { "Content-Type": "application/json" }})
+  return new Response(s, { headers: { "Content-Type": "application/json" } });
 };
 
 serveAPI("/api", async (param, req, path, conninfo) => {

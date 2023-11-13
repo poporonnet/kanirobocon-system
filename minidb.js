@@ -19,7 +19,7 @@ export const minidb = async (fn, cmd, param) => {
   } else if (cmd == "set") {
     const ss = param.data.split(",");
     const id = param.id || ss[0];
-    console.log("set", id, fn, param)
+    console.log("set", id, fn, param);
     const csv = await CSV.fetch(fn);
     for (let i = 1; i < csv.length; i++) {
       if (csv[i][0] == id) {
@@ -33,7 +33,7 @@ export const minidb = async (fn, cmd, param) => {
     return 1;
   } else if (cmd == "remove") {
     const id = param.id || ss[0];
-    console.log("remove", id, fn, param)
+    console.log("remove", id, fn, param);
     const csv = await CSV.fetch(fn);
     for (let i = 1; i < csv.length; i++) {
       if (csv[i][0] == id) {
