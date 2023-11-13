@@ -1,5 +1,5 @@
 import { drawTournament } from "./drawTournament.js";
-import { Settings } from "./Settings.js";
+import { Settings } from "./settings.js";
 
 const AUTO_RELOAD = true;
 var autoflg = false;

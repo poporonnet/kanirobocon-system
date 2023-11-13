@@ -1,4 +1,4 @@
-import {Settings} from "./Settings.js";
+import {Settings} from "./settings.js";
 
 const MATCH_ONCE = false
 

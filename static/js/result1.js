@@ -1,4 +1,4 @@
-import { Settings } from "./Settings.js";
+import { Settings } from "./settings.js";
 
 const MAX_ENTRY_T = Settings.getNumberOfMatch("T");
 const MAX_ENTRY_K = Settings.getNumberOfMatch("K");

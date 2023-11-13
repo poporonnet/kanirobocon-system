@@ -1,4 +1,4 @@
-import {Settings} from "./Settings.js";
+import {Settings} from "./settings.js";
 
 window.onload = function () {
     title.textContent = Settings.getTitle() + " データクリア";

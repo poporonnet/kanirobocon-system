@@ -45,7 +45,7 @@ deno run -r -A kanirobo-server.js
 
 ### 大会情報
 
-Settings.js で各種設定が可能です
+settings.js で各種設定が可能です
 
 - 大会名 : 各ページ見出しへの反映
 - 部門名 : T ... エントリー部門 , K ... 歩行部門

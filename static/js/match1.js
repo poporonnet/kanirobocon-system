@@ -1,4 +1,4 @@
-import {Settings} from "./Settings.js";
+import {Settings} from "./settings.js";
 
 const stageT = Settings.getNumberOfStage("T"); // 2
 const stageK = Settings.getNumberOfStage("K"); // 1
