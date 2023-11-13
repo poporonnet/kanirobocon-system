@@ -18,7 +18,7 @@ const retJSONP = (callback, obj) => {
 
 serveAPI("/api", async (param, req, path, conninfo) => {
   param = fromURLSearchParams(param);
-  if (param.key != password) {
+  if (param.key !== password) {
     return null;
   }
   const fn = "data/" + path.substring(5);

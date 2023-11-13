@@ -14,19 +14,17 @@
 <script src=js/minidb.js></script>
 <script type="module">
 import { Settings } from "./js/Settings.js";
-	
+
 const pointLabels = Settings.getPointLabels();
 const lastpnt = pointLabels.length - 1;
 
-"use strict";
-
-var preflg = true;
-var goalpointflg = false;
-var matchno = "1";
+let preflg = true;
+let goalpointflg = false;
+let matchno = "1";
 
 window.onload = function() {
 	initLabels();
-	var hash = document.location.hash;
+	let hash = document.location.hash;
 	if (hash.length <= 1) {
 		const entry = [];
 		const match = [];
@@ -41,54 +39,46 @@ window.onload = function() {
 		goalpointflg = true;
 		init(entry, match, result);
 	} else {
-		var nn = hash.substring(1).split(',');
+		let nn = hash.substring(1).split(',');
 		matchno = nn[0];
-		preflg = matchno == '1';
+		preflg = matchno === '1';
 		goalpointflg = !preflg;
-		
-		var match1id = nn[1];
-//		console.log(match1id);
-		
+
+		let match1id = nn[1];
+
 		MiniDB.load("entry", function(entry) {
 			MiniDB.get("match" + matchno, match1id, function(match) {
 				MiniDB.get("result" + matchno, match1id, function(result) {
-		//			dump(data);
-		/*
-//result
-//		match1id,category,entry1id,entry2id,score1,score2,time1,time2,flg1,flg2
-//match
-//		id,category,entry1id,entry2id,table,series
-		*/
 					// 受信した値をセット
-					if (result.length == 1) { // 無い場合、初期データ設定
-						var id1 = match[2];
-						var id2 = match[3];
+					if (result.length === 1) { // 無い場合、初期データ設定
+						let id1 = match[2];
+						let id2 = match[3];
 						//console.log(id1, id2)
 						if (id1 < 0 || id2 < 0) {
 							// entryidが、確定していない場合
 							MiniDB.load("result" + matchno, function(resall) {
-								var getWinner = function(matchid) {
-									var e1 = null;
-									var e2 = null;
-									var p1 = 0;
-									var p2 = 0;
-									for (var i = 1; i < resall.length; i++) {
-										var r = resall[i];
-										if (r[0] == matchid) {
+								let getWinner = function(matchid) {
+									let e1 = null;
+									let e2 = null;
+									let p1 = 0;
+									let p2 = 0;
+									for (let i = 1; i < resall.length; i++) {
+										let r = resall[i];
+										if (r[0] === matchid) {
 											e1 = r[2];
 											e2 = r[3];
 											p1 = parseInt(r[4]);
 											p2 = parseInt(r[5]);
 										}
 									}
-									if (e1 == null || e2 == null) {
+									if (e1 === null || e2 === null) {
 										alert("対戦結果データがありません");
 										window.location.href = "match2.html";
 										return 0;
 									}
-									for (var i = 1; i < resall.length; i++) {
-										var r = resall[i];
-										if (r[2] == e2 && r[3] == e1) {
+									for (let i = 1; i < resall.length; i++) {
+										let r = resall[i];
+										if (r[2] === e2 && r[3] === e1) {
 											p1 += parseInt(r[5]);
 											p2 += parseInt(r[4]);
 										}
@@ -99,12 +89,12 @@ window.onload = function() {
 								let eid2 = id2
 								if (eid1 < 0) {
 									eid1 = getWinner(-eid1);
-									if (eid1 == 0)
+									if (eid1 === 0)
 										return;
 								}
 								if (eid2 < 0) {
 									eid2 = getWinner(-eid2);
-									if (eid2 == 0)
+									if (eid2 === 0)
 										return;
 								}
 								//console.log(eid1, eid2);
@@ -137,16 +127,16 @@ window.onload = function() {
 		});
 	}
 };
-var initLabels = function(){
-	for (var i = 1; i <= 2; i++) {
-		for (var j = 0; j <= lastpnt; j++) {
-			if (j < 5 || j==8  || j==11) {
+let initLabels = function(){
+	for (let i = 1; i <= 2; i++) {
+		for (let j = 0; j <= lastpnt; j++) {
+			if (j < 5 || j===8  || j===11) {
 				get("p" + i + "c" + j + "l").textContent = pointLabels[j];
-			} else if (j==5){  // HTML element を保持
-				var base = get("p" + i + "c" + j + "l").innerHTML;
+			} else if (j===5){  // HTML element を保持
+				let base = get("p" + i + "c" + j + "l").innerHTML;
 				const tempEl = document.createElement('div');
 				tempEl.innerHTML = base.substr(base.indexOf('<'));
-				//var tags = base.substr(base.indexOf('<'));
+				//let tags = base.substr(base.indexOf('<'));
 				//console.log(tags);
 				get("p" + i + "c" + j + "l").textContent = pointLabels[j];
 				get("p" + i + "c" + j + "l").appendChild(tempEl.firstElementChild);
@@ -154,15 +144,15 @@ var initLabels = function(){
 		}
 	}
 };
-var init = function(entry, match, result) {
+let init = function(entry, match, result) {
 	if (preflg) {
 		init2(entry, match, result);
 	} else {
 		// 前回試合データを取得
 		MiniDB.load("result" + matchno, function(resall) {
-			for (var i = 1; i < resall.length; i++) {
-				var r = resall[i];
-				if (r[2] == result[3] && r[3] == result[2]) {
+			for (let i = 1; i < resall.length; i++) {
+				let r = resall[i];
+				if (r[2] === result[3] && r[3] === result[2]) {
 					init2(entry, match, result, r);
 					return;
 				}
@@ -171,18 +161,16 @@ var init = function(entry, match, result) {
 		});
 	}
 };
-var init2 = function(entry, match, result, resultbefore) {
-	var showPoint = function() {
-		for (var i = 1; i <= 2; i++) {
-			var p = "p" + i;
-			var pnt = 0;
-			for (var j = 0; j <= lastpnt; j++) {
+let init2 = function(entry, match, result, resultbefore) {
+	let showPoint = function() {
+		for (let i = 1; i <= 2; i++) {
+			let p = "p" + i;
+			let pnt = 0;
+			for (let j = 0; j <= lastpnt; j++) {
 				if (get(p + "c" + j).checked) {
-					//if (j == 4 || j == 10) {
-					//if (j == 4 || j == 10 || j == 7 || j == 8) { // 奥レアメタルも+2 // 2019
-					if (j == 4) { // 地球帰還のみ2点 2020
+					if (j === 4) { // 地球帰還のみ2点 2020
 						pnt += 2;
-					} else if (j == 5) { //  || j == 9) {
+					} else if (j === 5) { //  || j === 9) {
 						if (goalpointflg)
 							pnt++;
 					} else {
@@ -191,29 +179,29 @@ var init2 = function(entry, match, result, resultbefore) {
 				}
 			}
 			get(p).textContent = pnt;
-			
+
 			if (preflg) {
 				get(p + "s").textContent = "";
 			} else {
 				if (!resultbefore) {
 					get(p + "s").textContent = pnt + "+0=" + pnt;
 				} else {
-					var pntbefore = resultbefore[i == 1 ? 5 : 4 ];
+					let pntbefore = resultbefore[i === 1 ? 5 : 4 ];
 					get(p + "s").textContent = pntbefore + "+" + pnt + "=" + (parseInt(pntbefore) + pnt);
 				}
 			}
 		}
 	};
-	var changeTime = function(time) {
-		var t = time.split(":");
-		var t2 = 180 - (parseInt(t[0]) * 60 + parseInt(t[1]));
+	let changeTime = function(time) {
+		let t = time.split(":");
+		let t2 = 180 - (parseInt(t[0]) * 60 + parseInt(t[1]));
 		return Math.floor(t2 / 60) + ":" + fixnum(t2 % 60, 2);
 	};
-	
-	for (var i = 1; i <= 2; i++) {
-		var p = "p" + i;
-		for (var j = 0; j <= lastpnt; j++) {
-			if (j == 5) { // ゴール時
+
+	for (let i = 1; i <= 2; i++) {
+		let p = "p" + i;
+		for (let j = 0; j <= lastpnt; j++) {
+			if (j === 5) { // ゴール時
 				get(p + "c" + j).entryid = i;
 				get(p + "c" + j).onchange = function() {
 					if (this.checked) {
@@ -228,19 +216,19 @@ var init2 = function(entry, match, result, resultbefore) {
 			}
 		}
 	}
-	var resetPointAll = function() {
-		for (var i = 1; i <= 2; i++) {
-			var p = "p" + i;
-			for (var j = 0; j <= lastpnt; j++) {
+	let resetPointAll = function() {
+		for (let i = 1; i <= 2; i++) {
+			let p = "p" + i;
+			for (let j = 0; j <= lastpnt; j++) {
 				get(p + "c" + j).checked = false;
 			}
 			get("time" + i).textContent = "";
 		}
 		showPoint();
 	};
-	var resetPoint = function(n) {
-		var p = "p" + n;
-		for (var j = 0; j <= lastpnt; j++) {
+	let resetPoint = function(n) {
+		let p = "p" + n;
+		for (let j = 0; j <= lastpnt; j++) {
 			get(p + "c" + j).checked = false;
 		}
 		get("time" + n).textContent = "";
@@ -252,33 +240,31 @@ var init2 = function(entry, match, result, resultbefore) {
 	p2.onclick = function() {
 		resetPoint(2);
 	};
-	var remaint = 0;
-	var lastt = 0;
-	var timer = function() {
-		var t = new Date().getTime();
+	let remaint = 0;
+	let lastt = 0;
+	let timer = function() {
+		let t = new Date().getTime();
 		if (lastt) {
 			remaint -= t - lastt;
 		}
 		lastt = t;
-		
-//		var limitt = (6 * 60) * 1000 + (1000 - 1);
-		var dt = remaint;
+
+		let dt = remaint;
 		if (dt < 0)
 			dt = 0;
-		var min = Math.floor(dt / 1000 / 60);
-		var sec = Math.floor(dt / 1000 % 60);
-		var s = min + ":";
+		let min = Math.floor(dt / 1000 / 60);
+		let sec = Math.floor(dt / 1000 % 60);
+		let s = min + ":";
 		if (sec < 10)
 			s += "0";
 		s += sec;
 		time.textContent = s;
 	};
-	var tid = null;
-	var TID_STOP = {};
+	let tid = null;
+	let TID_STOP = {};
 	time.onmousedown = function() {
-//		baset = new Date().getTime();
 		if (tid) {
-			if (tid == TID_STOP) {
+			if (tid === TID_STOP) {
 				resetTimer();
 			} else {
 				clearInterval(tid);
@@ -289,19 +275,18 @@ var init2 = function(entry, match, result, resultbefore) {
 			tid = setInterval(timer, 100);
 		}
 	};
-	
-	var matchtime;
-	var resetTimer = function() {
+
+	let matchtime;
+	let resetTimer = function() {
 		clearInterval(tid);
 		tid = null;
 		lastt = 0;
 		time.textContent = matchtime + ":00";
 		remaint = matchtime * 60 * 1000;// + 999;
 	};
-	var showMatch = function(smatch, result) {
-//		console.log(smatch);
-		var matchname = smatch[1] + smatch[4] + "-" + smatch[5];
-		var getMatch = function(s) {
+	let showMatch = function(smatch, result) {
+		let matchname = smatch[1] + smatch[4] + "-" + smatch[5];
+		let getMatch = function(s) {
 			if (s.startsWith("T")) {
 				s = Settings.getGroup("T") + s.substring(1);  // エントリー部門
 			} else if (s.startsWith("K")) {
@@ -312,58 +297,48 @@ var init2 = function(entry, match, result, resultbefore) {
 			return s;
 		};
 		get("match").textContent = getMatch(matchname);
-		var getTeam = function(entryid) {
-			for (var i = 1; i < entry.length; i++) {
-				if (entry[i][0] == entryid) {
+		let getTeam = function(entryid) {
+			for (let i = 1; i < entry.length; i++) {
+				if (entry[i][0] === entryid) {
 					let s = entry[i][2]
-					/*
-					const n = s.indexOf('（')
-					if (n >= 0)
-						return s.substring(0, n)
-					const m = s.indexOf('(')
-					if (m >= 0)
-						return s.substring(0, m)
-					*/
 					return s
 				}
 			}
 			return "";
 		};
-		
+
 		t1.textContent = getTeam(result[2]);
 		t2.textContent = getTeam(result[3]);
-		
-		matchtime = 3; //matchname.startsWith("T") ? 4 : 6;
+
+		matchtime = 3;
 		resetTimer();
-		
-//		resetPointAll();
-		
+
 		get("time1").textContent = result[6];
 		get("time2").textContent = result[7];
 		deserializeChecks(1, result[8]);
 		deserializeChecks(2, result[9]);
 		showPoint();
 	};
-	
-	var serializeChecks = function(n) {
-		var s = "";
-		var p = "p" + n;
-		for (var j = 0; j <= lastpnt; j++) {
+
+	let serializeChecks = function(n) {
+		let s = "";
+		let p = "p" + n;
+		for (let j = 0; j <= lastpnt; j++) {
 			s += get(p + "c" + j).checked ? "1" : "0";
 		}
 		return s;
 	};
-	var deserializeChecks = function(n, s) {
-		var p = "p" + n;
-		for (var j = 0; j <= lastpnt; j++) {
-			get(p + "c" + j).checked = s.charAt(j) == "1";
+	let deserializeChecks = function(n, s) {
+		let p = "p" + n;
+		for (let j = 0; j <= lastpnt; j++) {
+			get(p + "c" + j).checked = s.charAt(j) === "1";
 		}
 	};
 //	10000000000
-	
+
 	showMatch(match, result);
-	
-	var saveAndQuit = function() {
+
+	let saveAndQuit = function() {
 		if (result[0] < 0 || !tid) {
 			window.location.href = "menu.html";
 			return;
@@ -379,14 +354,14 @@ var init2 = function(entry, match, result, resultbefore) {
 		result[7] = get("time2").textContent;
 		result[8] = serializeChecks(1);
 		result[9] = serializeChecks(2);
-		
-		var  cond = true;
-		if (result[4] == 0 && result[5] == 0) {
+
+		let  cond = true;
+		if (result[4] === 0 && result[5] === 0) {
 			cond = confirm("双方のスコアがゼロです。対戦結果を記録しますか？");
 		}
 		if (cond) {
 			MiniDB.set("result" + matchno, result.join(","), function (res) {
-				if (res == 1) {
+				if (res === 1) {
 					window.location.href = "match" + matchno + ".html";
 				} else {
 					alert("スコアの登録に失敗しました。リトライしてください");
@@ -396,27 +371,10 @@ var init2 = function(entry, match, result, resultbefore) {
 			window.location.href = "match" + matchno + ".html";
 		}
 	};
-	
+
 	window.onbeforeunload = saveAndQuit;
 	prevbtn.onclick = saveAndQuit;
 
-
-	/*
-	prev.onclick = function() {
-		if (nmatch > 0) {
-			saveMatch();
-			nmatch--;
-			showMatch(nmatch);
-		}
-	};
-	next.onclick = function() {
-		if (nmatch < MATCH.length - 1) {
-			saveMatch();
-			nmatch++;
-			showMatch(nmatch);
-		}
-	};
-	*/
 };
 
 document.addEventListener("touchmove", function(e) {
