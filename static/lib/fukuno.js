@@ -10,16 +10,6 @@ String.prototype.endsWith = function(s) {
 		return false;
 	return this.lastIndexOf(s) == this.length - s.length;
 };
-/*
-Array.prototype.remove = function(o) {
-	for (var i = 0; i < this.length; i++) {
-		if (this[i] === o) {
-			this.splice(i, 1);
-			i--;
-		}
-	}
-};
-*/
 var get = function(id) {
 	return document.getElementById(id);
 };
@@ -195,7 +185,7 @@ var ajax = function(url, callback) {
 	xhr.setRequestHeader("If-Modified-Since", "Thu, 01 Jun 1970 00:00:00 GMT");
 	xhr.send(data);
 };
-var xml2json = function(xml) { // attribute–³Ž‹A–¼‘Od‚È‚Á‚½‚ç”z—ñ‰»
+var xml2json = function(xml) { // attributeï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Oï¿½dï¿½È‚ï¿½ï¿½ï¿½ï¿½ï¿½zï¿½ï¿½
 	var f = function(xml) {
 		var json = {};
 		var text = [];

@@ -2,11 +2,6 @@ const enc = (s) => encodeURIComponent(s);
 
 var MiniDB = {
   endpoint: "./api/kanirobocon/",
-  //endpoint: "https://fukuno.jig.jp/minidb/kanirobo2021/",
-  //endpoint: "http://172.20.10.4:8888/minidb/kanirobo2020/",
-  //	endpoint: "http://localhost:8888/minidb/kanirobo2020/",
-  //	endpoint: "https://sabae.cc/minidb/kanirobo2019/",
-  //	endpoint: "http://sabae.cc/minidb/kanirobo2018/",
   load: function (name, callback) {
     var key = localStorage.getItem("key");
     var url = this.endpoint + name + ".csv?cmd=load&key=" + enc(key);

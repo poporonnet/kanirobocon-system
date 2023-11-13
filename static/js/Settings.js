@@ -1,3 +1,4 @@
+// ToDo: 設定を設定ファイルから読み込むようにする
 class Settings {
   static getTitle() {
     return "越前がにロボコン";

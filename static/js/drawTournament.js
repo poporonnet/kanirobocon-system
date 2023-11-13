@@ -1,7 +1,8 @@
 import { getCanvasContext } from "./getCanvasContext.js";
 
 const drawTournament = function (canvas, title, finalist, match, result) {
-  const getResult = function (id1, id2) { // ret: 0 none, -1: id1 won, 1: id2 won
+  // ret: 0 none, -1: id1 won, 1: id2 won
+  const getResult = function (id1, id2) { 
     let r1 = null;
     let r2 = null;
     for (let i = 1; i < result.length; i++) {
@@ -16,11 +17,9 @@ const drawTournament = function (canvas, title, finalist, match, result) {
     if (r1 && r2) {
       const p1 = parseInt(r1[4]) + parseInt(r2[5]);
       const p2 = parseInt(r1[5]) + parseInt(r2[4]);
-      //			console.log(id1, "pnt:", p1, id2, "pnt:", p2);
-      //			console.log(r1, r2);
       res = p1 > p2 ? -1 : 1;
     }
-    //console.log("getresult", id1, id2, res)
+
     return res;
   };
 
@@ -77,7 +76,6 @@ const drawTournament = function (canvas, title, finalist, match, result) {
     }
     g.font = fw + "px sans-serif";
 
-    //console.log(items)
     for (let i = 1; i < items.length; i++) {
       const id = series[i - 1];
       const item = items[id];
@@ -145,7 +143,7 @@ const drawTournament = function (canvas, title, finalist, match, result) {
       g.stroke();
     };
 
-    //		console.log(pnt)
+
     const lw = (g.cw - (nameoff + namew + nameoff2) * 2) / (matchf.length * 2);
     const lineoff = nameoff + namew + nameoff2;
     for (let i = 0; i < matchf.length; i++) {
@@ -167,17 +165,13 @@ const drawTournament = function (canvas, title, finalist, match, result) {
           const pcx = lineoff + lw * (i + 1);
           const pcy = (pa.y + pb.y) / 2;
 
-          if (true) { // i == 0) {
+          if (true) {
             setColor(res, true);
             line(pa.x, pa.y, pcx, pa.y);
             setColor(res, false);
             line(pb.x, pb.y, pcx, pb.y);
-          } else {
-            setColor2(true);
-            //setColor2(res)
-            line(pa.x, pa.y, pcx, pa.y);
-            line(pb.x, pb.y, pcx, pb.y);
           }
+
           setColor(res, true);
           line(pcx, pa.y, pcx, pcy);
           setColor(res, false);
@@ -188,14 +182,13 @@ const drawTournament = function (canvas, title, finalist, match, result) {
           const pcx = g.cw - lineoff - lw * (i + 1);
           const pcy = (pa.y + pb.y) / 2;
 
-          if (true) { // i == 0) {
+          if (true) {
             setColor(res, true);
             line(pa.x, pa.y, pcx, pa.y);
             setColor(res, false);
             line(pb.x, pb.y, pcx, pb.y);
           } else {
             setColor2(true);
-            //setColor2(res)
             line(pa.x, pa.y, pcx, pa.y);
             line(pb.x, pb.y, pcx, pb.y);
           }
@@ -216,42 +209,6 @@ const drawTournament = function (canvas, title, finalist, match, result) {
       }
     }
   };
-  /*
-	setUI(c);
-	c.onuidown = function(x, y) {
-		for (var i = 0; i < stacks.length; i++) {
-			var st = stacks[i];
-			for (var j = 0; j < st.length; j++) {
-				var stj = st[j];
-				if (isNear(stj.x * g.cw, stj.y, x, y)) {
-					console.log(i, j, stj.winner);
-					if (stj.winner) {
-						stj.winner = stj.winner == stj.right ? stj.left : stj.right;
-						console.log("toggle");
-					} else {
-						stj.winner = stj.right;
-						console.log("right " + stj.right);
-					}
-				}
-			}
-		}
-		g.draw();
-	};
-	var isNear = function(x1, y1, x2, y2) {
-		var dx = x1 - x2;
-		var dy = y1 - y2;
-		var w = g.cw / item.length / 4;
-//		console.log(dx, dy, w, x1, y1, x2, y2);
-//		alert(w);
-		return dx * dx + dy * dy < w * w;
-	};
-	c.onmousedown = function(e) {
-		console.log(e);
-//		mx = e.pageX;
-//		my = e.pageY;
-//		alert(e.pageX);
-	};
-	*/
   window.onresize = function () {
     canvas.style.height = window.innerHeight + "px";
     g.init();
