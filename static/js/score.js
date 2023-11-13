@@ -1,4 +1,4 @@
-import { Settings } from "./settings.js";
+import { Settings } from "../lib/settings.js";
 
 const pointLabels = Settings.getPointLabels();
 const lastpnt = pointLabels.length - 1;
