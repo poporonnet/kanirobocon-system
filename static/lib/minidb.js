@@ -1,6 +1,6 @@
 const enc = (s) => encodeURIComponent(s);
 
-var MiniDB = {
+const MiniDB = {
   endpoint: "./api/kanirobocon/",
   load: function (name, callback) {
     var key = localStorage.getItem("key");

@@ -1,11 +1,8 @@
 import { CSV } from "https://code4sabae.github.io/js/CSV.js";
 
-const rnd = (n) => {
-    return Math.floor(Math.random() * n);
-};
 const shuffle = (array) => {
-    for (let i = 0; i < array.length; i++) {
-        const n = rnd(array.length);
+    for (const i of array) {
+        const n =  Math.floor(Math.random() * array.length);
         const tmp = array[i];
         array[i] = array[n];
         array[n] = tmp;
@@ -30,7 +27,6 @@ window.onload = async () => {
     for (let i = json.length - 1; i >= 0; i--) {
         if (json[i].rank === "seiko") {
             json.push(json[i]);
-            //json.push(json[i]);
         }
     }
 

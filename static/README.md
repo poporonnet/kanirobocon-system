@@ -5,7 +5,7 @@
 ## Usage
 
 ```
-deno run -A kanirobo-server.js
+deno run -A kanirobo-server.ts
 ```
 
 ## Setting

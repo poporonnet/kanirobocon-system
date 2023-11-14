@@ -12,7 +12,7 @@
 [Deno](https://deno.land/)をインストールし下記で実行
 
 ```bash
-deno run -A kanirobo-server.js
+deno run -A kanirobo-server.ts
 ```
 
 - [http://[::]:8000/](http://[::]:8000/)を開く
@@ -22,7 +22,7 @@ deno run -A kanirobo-server.js
 ### IPv4でポート8888を使用して起動
 
 ```bash
-deno run -A kanirobo-server.js --ipv4 8888
+deno run -A kanirobo-server.ts --ipv4 8888
 ```
 
 - [http://localhost:8888/](http://localhost:8888/)を開く
@@ -32,7 +32,7 @@ deno run -A kanirobo-server.js --ipv4 8888
 -r オプションにより、リモートリソースの再読み込みを行って起動
 
 ```bash
-deno run -r -A kanirobo-server.js
+deno run -r -A kanirobo-server.ts
 ```
 
 ## ID/パスワード
@@ -64,7 +64,7 @@ data/entry.csv に、参加者情報を記入してください
 
 ## 修正しなければいけないこと
 - [ ] デッドコードを削除
-- [ ] `var`を削除
+- [x] `var`を削除
 - [ ] 大規模なリファクタリング
   - [ ] csv -> json or Deno KV
   - [ ] JS -> TS
